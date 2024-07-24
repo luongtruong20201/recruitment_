@@ -1,0 +1,148 @@
+@startuml database
+
+entity Users {
+  *id: number <<PK>>
+  --
+  email: string
+  name: string
+  password: string
+  age: number;
+  address: string
+  refresh_token: string
+  role_id: number <<FK>> (Roles)
+  *company_id: number <<FK>> (Companies)
+  otp_secret: string
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Companies {
+  * id: number <<PK>>
+  --
+  name: string
+  address: string
+  logo: string
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Jobs {
+  * id: number <<PK>>
+  --
+  *company_id: <<FK>> (Companies)
+  *tag_id: <<FK>> (Tags)
+  name: string
+  level: string
+  address: string
+  salary: number
+  quantity: number
+  description: string
+  start_date: datetime
+  end_date: datetime
+  status: enum(active, inactive)
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity CVs {
+  * id: number <<PK>>
+  --
+  * user_id: <<FK>> (Users)
+  url: string
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Resumes {
+  * id: number <<PK>>
+  --
+  job_id: number <<FK>> (Jobs)
+  cv_id: number <<FK>> (CVs)
+  status: enum(pending, reviewing, approved, rejected)
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Roles {
+  * id: number <<PK>>
+  --
+  name: string
+  status: enum(active, inactive)
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Permissions {
+  *id: number <<PK>>
+  --
+  name: string
+  api: string
+  method: string
+  *role_id: number <<FK>> (Users)
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Tags {
+  * id: number <<PK>>
+  --
+  name: string
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Registrations {
+  * id: number <<PK>>
+  --
+  user_id: <<FK>> (Users)
+  tag_id: <<FK>> (Tags)
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+entity Permission_Role {
+  *id: number <<PK>>
+  --
+  role_id: number <<FK>>
+  permission_id: number <<FK>>
+  --
+  created_at: datetime
+  updated_at: datetime
+  deleted_at: datetime
+}
+
+Users ||--|| Roles
+
+Users ||--|{ CVs
+
+Roles ||--|{ Permission_Role
+Permission_Role }|--|| Permissions
+
+Companies ||--|{ Jobs
+Jobs ||--|{ Tags
+
+Resumes }|--|| Jobs
+Resumes }|-- CVs
+
+Registrations }|--|| Tags
+Registrations }|--|| Users
+
+@enduml
