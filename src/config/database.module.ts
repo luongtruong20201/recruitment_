@@ -1,8 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EEnv } from 'src/constants/env.constant';
+import { User } from 'src/entities/user.entity';
+import { REPOSITORIES } from 'src/repositories';
 
+@Global()
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -15,12 +18,15 @@ import { EEnv } from 'src/constants/env.constant';
           username: configService.get<string>(EEnv.DB_USERNAME),
           password: configService.get<string>(EEnv.DB_PASSWORD),
           database: configService.get<string>(EEnv.DB_DATABASE),
-          entities: [],
+          entities: [User],
           synchronize: true,
+          logging: true,
         };
         return options;
       },
     }),
   ],
+  providers: [...REPOSITORIES],
+  exports: [...REPOSITORIES],
 })
 export class DatabaseModule {}

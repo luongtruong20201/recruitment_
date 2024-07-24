@@ -10,6 +10,7 @@ export const enableSwagger = (
   const config = new DocumentBuilder()
     .setTitle('App API')
     .setDescription('The App API description')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
