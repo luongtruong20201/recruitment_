@@ -50,22 +50,11 @@ entity Jobs {
   deleted_at: datetime
 }
 
-entity CVs {
-  * id: number <<PK>>
-  --
-  * user_id: <<FK>> (Users)
-  url: string
-  --
-  created_at: datetime
-  updated_at: datetime
-  deleted_at: datetime
-}
-
 entity Resumes {
   * id: number <<PK>>
   --
   job_id: number <<FK>> (Jobs)
-  cv_id: number <<FK>> (CVs)
+  user_id: number <<FK>> (Users)
   status: enum(pending, reviewing, approved, rejected)
   --
   created_at: datetime
@@ -131,7 +120,7 @@ entity Permission_Role {
 
 Users ||--|| Roles
 
-Users ||--|{ CVs
+Users ||--|{ Resumes
 
 Roles ||--|{ Permission_Role
 Permission_Role }|--|| Permissions
@@ -140,7 +129,6 @@ Companies ||--|{ Jobs
 Jobs ||--|{ Tags
 
 Resumes }|--|| Jobs
-Resumes }|-- CVs
 
 Registrations }|--|| Tags
 Registrations }|--|| Users
