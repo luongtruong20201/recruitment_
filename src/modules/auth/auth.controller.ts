@@ -5,6 +5,7 @@ import {
   ForgotPasswordReqBody,
   ForgotPasswordVerification,
   LoginReqBody,
+  RefreshTokeReqBody,
   RegisterReqBody,
   RegisterVerificationReqBody,
   ResetPasswordReqBody,
@@ -47,5 +48,10 @@ export class AuthController {
   @Post('reset-password')
   resetPassword(@Body() body: ResetPasswordReqBody) {
     return this.authService.resetPassword(body);
+  }
+
+  @Post('refresh-token')
+  refreshToken(@Body() body: RefreshTokeReqBody) {
+    return this.authService.refreshToken(body.refreshToken);
   }
 }

@@ -2,13 +2,13 @@ version: '3'
 
 services:
   db:
-    image: mysql
+    image: mysql:8.4.2
     container_name: database
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=luongtruong
       - MYSQL_DATABASE=database
     ports:
-      - '3306:3306'
+      - '3307:3306'
     expose:
       - '3306'

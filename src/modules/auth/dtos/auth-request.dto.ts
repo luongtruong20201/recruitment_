@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsJWT,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class LoginReqBody {
   @ApiProperty()
@@ -47,3 +53,9 @@ export class ForgotPasswordReqBody {
 export class ForgotPasswordVerification extends RegisterVerificationReqBody {}
 
 export class ResetPasswordReqBody extends LoginReqBody {}
+
+export class RefreshTokeReqBody {
+  @IsNotEmpty()
+  @IsJWT()
+  refreshToken: string;
+}

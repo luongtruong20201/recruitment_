@@ -87,10 +87,13 @@ export class AuthService {
     ).toString();
 
     console.log('check verificationUrl: ', verificationUrl);
-    await Promise.all([
-      user.save(),
-      this.mailService.sendVerification(user.email, verificationUrl),
-    ]);
+    // await Promise.all([
+    //   user.save(),
+    //   this.mailService.sendVerification(user.email, verificationUrl),
+    // ]);
+    await user.save().then(() => {
+      this.mailService.sendVerification(user.email, verificationUrl);
+    });
   }
 
   async registerVerification(token: string) {
@@ -182,6 +185,18 @@ export class AuthService {
     userExist.password = password;
 
     await this.userRepository.save(userExist);
+  }
+
+  async refreshToken(refreshToken: string) {
+    let decodedData: IJwtPayload;
+    try {
+      decodedData = this.jwtService.verify(refreshToken, {
+        secret: this.configService.get<string>(EEnv.JWT_REFRESH_TOKEN_SECRET),
+      });
+    } catch (error) {
+      throw new BadRequestException(EError.REFRESH_TOKEN_INVALID);
+    }
+    console.log(decodedData);
   }
 
   async login(user: User) {

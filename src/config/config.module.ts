@@ -11,6 +11,8 @@ import { EEnv } from 'src/constants/env.constant';
       validationSchema: Joi.object({
         [EEnv.PORT]: Joi.number().default(3000),
         [EEnv.SWAGGER]: Joi.string().default('docs'),
+        [EEnv.CLIENT_URL]: Joi.string().required(),
+        [EEnv.CRYPTO_SECRET_KEY]: Joi.string().required(),
 
         [EEnv.DB_HOST]: Joi.string().default('localhost'),
         [EEnv.DB_PORT]: Joi.number().default(3306),

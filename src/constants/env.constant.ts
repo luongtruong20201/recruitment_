@@ -2,6 +2,7 @@ export enum EEnv {
   PORT = 'PORT',
   SWAGGER = 'SWAGGER',
   CLIENT_URL = 'CLIENT_URL',
+  CRYPTO_SECRET_KEY = 'CRYPTO_SECRET_KEY',
 
   DB_HOST = 'DB_HOST',
   DB_PORT = 'DB_PORT',
