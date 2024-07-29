@@ -99,8 +99,6 @@ export class AuthService {
   async registerVerification(token: string) {
     const encodedData: IOtpCode = JSON.parse(decryptWithAES(token));
 
-    console.log('check encodedData: ', encodedData);
-
     if (encodedData.type !== EAuthType.REGISTER) {
       throw new BadRequestException(EError.INVALID_OTP_TYPE);
     }
@@ -114,7 +112,6 @@ export class AuthService {
     }
 
     const isValid = verifyOtp(encodedData.otp, pendingUser.otpSecret);
-
     if (!isValid) {
       throw new BadRequestException(EError.VERIFY_OTP_FAILED);
     }

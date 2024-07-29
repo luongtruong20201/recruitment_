@@ -8,6 +8,8 @@ import { FiltersModule } from './shared/modules/filters/filter.module';
 import { InterceptorModule } from './shared/modules/interceptors/interceptor.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { CompaniesModule } from './modules/companies/companies.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { PermisisonsModule } from './modules/permissions/permissions.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { CompaniesModule } from './modules/companies/companies.module';
     AuthModule,
     TagsModule,
     CompaniesModule,
+    RolesModule,
+    PermisisonsModule,
   ],
 })
 export class AppModule {}

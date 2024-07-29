@@ -12,7 +12,9 @@ export class Role extends CustomBaseEntity {
   @Column()
   status: ERoleStatus;
 
-  @OneToMany(() => PermissionRole, (permissionRole) => permissionRole.role)
+  @OneToMany(() => PermissionRole, (permissionRole) => permissionRole.role, {
+    cascade: true,
+  })
   permissionRoles: PermissionRole[];
 
   @OneToMany(() => User, (user) => user.role)

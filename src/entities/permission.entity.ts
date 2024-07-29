@@ -1,7 +1,10 @@
-import { EMethod } from 'src/constants/permission.constant';
 import { CustomBaseEntity } from 'src/shared/base/base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { PermissionRole } from './permission-role.entity';
+import {
+  EAPIMethod,
+  EPermissionStatus,
+} from 'src/constants/permission.constant';
 
 @Entity('permissions')
 export class Permission extends CustomBaseEntity {
@@ -12,7 +15,10 @@ export class Permission extends CustomBaseEntity {
   api: string;
 
   @Column()
-  method: EMethod;
+  method: EAPIMethod;
+
+  @Column({ default: EPermissionStatus.ACTIVE })
+  status: EPermissionStatus;
 
   @OneToMany(
     () => PermissionRole,

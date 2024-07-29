@@ -31,6 +31,7 @@ import { EEnv } from 'src/constants/env.constant';
 
         [EEnv.MINIO_ACCESS_KEY]: Joi.string().required(),
         [EEnv.MINIO_SECRET_KEY]: Joi.string().required(),
+        [EEnv.MINIO_CLIENT_URL]: Joi.string().required(),
       }),
     }),
   ],
