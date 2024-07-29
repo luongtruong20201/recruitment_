@@ -37,7 +37,7 @@ export class Job extends CustomBaseEntity {
   @Column({ name: 'company_id' })
   companyId: number;
 
-  @Column({ name: 'job_tag_id' })
+  @Column({ name: 'job_tag_id', default: null })
   jobTagId: number;
 
   @OneToMany(() => JobTag, (jobTag) => jobTag.job)

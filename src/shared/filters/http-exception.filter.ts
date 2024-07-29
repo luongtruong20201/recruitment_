@@ -16,10 +16,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = context.getResponse();
 
     const exceptionResponse = exception.getResponse();
-    this.logger.error(exceptionResponse);
-
-    response
-      .status(exceptionResponse.statusCode)
-      .json(exceptionResponse as IResponse<any>);
+    this.logger.error(JSON.stringify(exceptionResponse, null, 4));
+    const data: IResponse<any> = {
+      status_code: exceptionResponse.statusCode,
+      data: null,
+      metadata: null,
+      message: exceptionResponse.message,
+      timestamp: new Date(),
+    };
+    response.status(exceptionResponse.statusCode).json(data);
   }
 }

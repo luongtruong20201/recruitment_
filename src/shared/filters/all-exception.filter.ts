@@ -17,6 +17,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const data: IResponse<any> = {
       data: null,
       status_code: HttpStatus.INTERNAL_SERVER_ERROR,
+      message: 'INTERNAL SERVER ERROR',
       timestamp: new Date(),
     };
     response.status(data.status_code).json(data);

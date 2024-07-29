@@ -7,6 +7,7 @@ import { GuardModule } from './shared/modules/guard/guard.module';
 import { FiltersModule } from './shared/modules/filters/filter.module';
 import { InterceptorModule } from './shared/modules/interceptors/interceptor.module';
 import { TagsModule } from './modules/tags/tags.module';
+import { CompaniesModule } from './modules/companies/companies.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TagsModule } from './modules/tags/tags.module';
     MailModule,
     AuthModule,
     TagsModule,
+    CompaniesModule,
   ],
 })
 export class AppModule {}

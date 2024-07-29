@@ -9,4 +9,6 @@ export class CreateTagReqBody {
   name: string;
 }
 
+export class UpdateTagReqBody extends CreateTagReqBody {}
+
 export class GetTagWithSortAndSearch extends PaginationWithSortAndSearchReqDto {}

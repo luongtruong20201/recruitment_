@@ -28,6 +28,9 @@ import { EEnv } from 'src/constants/env.constant';
         [EEnv.JWT_REFRESH_TOKEN_EXPIRES_IN]: Joi.number().required(),
         [EEnv.JWT_ACCESS_TOKEN_SECRET]: Joi.string().required(),
         [EEnv.JWT_ACCESS_TOKEN_EXPIRES_IN]: Joi.number().required(),
+
+        [EEnv.MINIO_ACCESS_KEY]: Joi.string().required(),
+        [EEnv.MINIO_SECRET_KEY]: Joi.string().required(),
       }),
     }),
   ],

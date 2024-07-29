@@ -8,7 +8,7 @@ export class Tag extends CustomBaseEntity {
   @Column()
   name: string;
 
-  @Column({ name: 'job_tag_id' })
+  @Column({ name: 'job_tag_id', default: null, nullable: true })
   jobTagId: number;
 
   @OneToMany(() => JobTag, (jobTag) => jobTag.tag)

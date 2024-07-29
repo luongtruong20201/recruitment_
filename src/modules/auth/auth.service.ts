@@ -78,7 +78,7 @@ export class AuthService {
     const encodedData: IOtpCode = {
       otp,
       email: user.email,
-      type: EAuthType.FORGOT_PASSWORD,
+      type: EAuthType.REGISTER,
     };
     const clientUrl = this.configService.get<string>(EEnv.CLIENT_URL);
     const verificationUrl = new URL(
@@ -98,6 +98,8 @@ export class AuthService {
 
   async registerVerification(token: string) {
     const encodedData: IOtpCode = JSON.parse(decryptWithAES(token));
+
+    console.log('check encodedData: ', encodedData);
 
     if (encodedData.type !== EAuthType.REGISTER) {
       throw new BadRequestException(EError.INVALID_OTP_TYPE);
