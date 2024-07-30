@@ -10,6 +10,7 @@ import { TagsModule } from './modules/tags/tags.module';
 import { CompaniesModule } from './modules/companies/companies.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { PermisisonsModule } from './modules/permissions/permissions.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PermisisonsModule } from './modules/permissions/permissions.module';
     CompaniesModule,
     RolesModule,
     PermisisonsModule,
+    FilesModule,
   ],
 })
 export class AppModule {}

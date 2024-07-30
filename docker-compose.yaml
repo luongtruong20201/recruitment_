@@ -6,10 +6,10 @@ services:
     container_name: database
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=luongtruong
-      - MYSQL_DATABASE=database
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
     ports:
-      - '3307:3306'
+      - '${DB_PORT}:3306'
     expose:
       - '3306'
 
@@ -27,3 +27,10 @@ services:
     expose:
       - '9000'
       - '9001'
+
+  queue:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - '9324:9324'
+      - '9325:9325'
