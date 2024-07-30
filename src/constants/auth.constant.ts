@@ -14,6 +14,7 @@ export interface IOtpCode {
 export interface IJwtPayload {
   userId: number;
   status: EUserStatus;
+  roleId?: number;
 }
 
 export enum EAuthKey {

@@ -202,6 +202,7 @@ export class AuthService {
     const payload: IJwtPayload = {
       userId: user.id,
       status: user.status,
+      roleId: user.roleId,
     };
 
     const [accessToken, refreshToken] = await Promise.all([

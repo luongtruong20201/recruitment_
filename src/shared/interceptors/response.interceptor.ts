@@ -6,6 +6,7 @@ import {
   Logger,
   NestInterceptor,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { map, Observable } from 'rxjs';
 import { IResponse } from 'src/constants/response.constant';
 
@@ -31,9 +32,8 @@ export class ResponseInterceptor<T>
     context: ExecutionContext,
     next: CallHandler<T>,
   ): Observable<IResponse<T>> | Promise<Observable<IResponse<T>>> {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
     this.logger.log(request.headers, request.query, request.params);
-
     return next.handle().pipe(
       map((data) => {
         const response = context.switchToHttp().getResponse();
