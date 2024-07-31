@@ -23,7 +23,7 @@ export class Job extends CustomBaseEntity {
   quantity: number;
 
   @Column()
-  description: number;
+  description: string;
 
   @Column()
   startDate: Date;
@@ -37,10 +37,7 @@ export class Job extends CustomBaseEntity {
   @Column({ name: 'company_id' })
   companyId: number;
 
-  @Column({ name: 'job_tag_id', default: null })
-  jobTagId: number;
-
-  @OneToMany(() => JobTag, (jobTag) => jobTag.job)
+  @OneToMany(() => JobTag, (jobTag) => jobTag.job, { cascade: true })
   jobTags: JobTag[];
 
   @ManyToOne(() => Company, (company) => company.jobs)

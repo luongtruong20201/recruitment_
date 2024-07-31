@@ -11,6 +11,7 @@ import { CompaniesModule } from './modules/companies/companies.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { PermisisonsModule } from './modules/permissions/permissions.module';
 import { FilesModule } from './modules/files/files.module';
+import { JobsModule } from './modules/jobs/jobs.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { FilesModule } from './modules/files/files.module';
     RolesModule,
     PermisisonsModule,
     FilesModule,
+    JobsModule,
   ],
 })
 export class AppModule {}

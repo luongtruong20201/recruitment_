@@ -1,4 +1,5 @@
 import { CompanyRepository } from './company.repository';
+import { JobTagRepository } from './job-tag.repository';
 import { JobRepository } from './job.repository';
 import { PermissionRoleRepository } from './permission-role.repository';
 import { PermissionRepository } from './permission.repository';
@@ -18,4 +19,5 @@ export const REPOSITORIES = [
   ResumeRepository,
   RoleRepository,
   TagRepository,
+  JobTagRepository,
 ];

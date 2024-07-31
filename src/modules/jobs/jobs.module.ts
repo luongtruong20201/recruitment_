@@ -7,4 +7,4 @@ import { JobsService } from './jobs.service';
   controllers: [JobController],
   providers: [JobsService],
 })
-export class CompaniesModule {}
+export class JobsModule {}

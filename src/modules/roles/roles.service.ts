@@ -20,7 +20,6 @@ export class RolesService {
   ) {}
 
   async createRole(data: CreateRoleReqDto) {
-    console.log('check data: ', data);
     const roleExistWithName = await this.roleRepository.findOneBy({
       name: data.name,
     });
