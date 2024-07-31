@@ -8,6 +8,8 @@ import {
 import { EError } from 'src/constants/error.constant';
 import { toPagination } from 'src/shared/utils/pagination';
 import { ECompanyStatus } from 'src/constants/company.constant';
+import { EJobStatus } from 'src/constants/job.constant';
+import { MoreThanOrEqual } from 'typeorm';
 
 @Injectable()
 export class CompaniesService {
@@ -62,5 +64,21 @@ export class CompaniesService {
     const [companies, count] =
       await this.companyRepository.getListcompanyWithSortAndSearch(data);
     return toPagination(companies, count, data);
+  }
+
+  async getCompanyById(id: number) {
+    const company = await this.companyRepository.findOne({
+      where: {
+        id,
+        status: ECompanyStatus.ACTIVE,
+        jobs: {
+          status: EJobStatus.ACTIVE,
+          endDate: MoreThanOrEqual(new Date()),
+        },
+      },
+      relations: { jobs: true },
+    });
+
+    return company;
   }
 }

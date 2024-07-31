@@ -23,10 +23,14 @@ export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
   @Get()
-  @ApiBearerAuth()
   @GuardJwt()
   getListCompany(@Query() options: GetListCompanyReqQuery) {
     return this.companiesService.getListCompaniesWithSortAndSearch(options);
+  }
+
+  @Get(':id')
+  getCompanyById(@Param('id') id: number) {
+    return this.companiesService.getCompanyById(id);
   }
 
   @Post()

@@ -1,9 +1,20 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { ApiTags } from '@nestjs/swagger';
 import {
   CreateRoleReqDto,
   GetListRolesWithSortAndSearchReqDto,
+  UpdateListPermission,
+  UpdateRoleReqDto,
 } from './dtos/role-request.dto';
 import { GuardPublic } from 'src/shared/decorators/auth.decorator';
 
@@ -26,5 +37,15 @@ export class RolesController {
   @Get()
   getListRoles(@Query() options: GetListRolesWithSortAndSearchReqDto) {
     return this.rolesService.getListRoles(options);
+  }
+
+  @Delete(':id')
+  deleteRoleById(@Param('id') id: number) {
+    return this.rolesService.deleteRoleById(id);
+  }
+
+  @Put(':id')
+  updateRole(@Body() body: UpdateListPermission, @Param('id') id: number) {
+    return this.rolesService.updateRole(body, id);
   }
 }

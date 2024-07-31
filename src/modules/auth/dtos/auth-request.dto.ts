@@ -55,6 +55,7 @@ export class ForgotPasswordVerification extends RegisterVerificationReqBody {}
 export class ResetPasswordReqBody extends LoginReqBody {}
 
 export class RefreshTokeReqBody {
+  @ApiProperty()
   @IsNotEmpty()
   @IsJWT()
   refreshToken: string;

@@ -3,6 +3,7 @@ import { RoleRepository } from 'src/repositories/role.repository';
 import {
   CreateRoleReqDto,
   GetListRolesWithSortAndSearchReqDto,
+  UpdateListPermission,
 } from './dtos/role-request.dto';
 import { EError } from 'src/constants/error.constant';
 import { PermissionRepository } from 'src/repositories/permission.repository';
@@ -10,6 +11,8 @@ import { EPermissionStatus } from 'src/constants/permission.constant';
 import { PermissionRoleRepository } from 'src/repositories/permission-role.repository';
 import { PermissionRole } from 'src/entities/permission-role.entity';
 import { toPagination } from 'src/shared/utils/pagination';
+import { ERoleStatus, EUpdateRoleType } from 'src/constants/role.constant';
+import { In, Not } from 'typeorm';
 
 @Injectable()
 export class RolesService {
@@ -64,5 +67,41 @@ export class RolesService {
   async getListRoles(options: GetListRolesWithSortAndSearchReqDto) {
     const [roles, count] = await this.roleRepository.getListRoles(options);
     return toPagination(roles, count, options);
+  }
+
+  async deleteRoleById(id: number) {
+    const roleExist = await this.roleRepository.findOne({
+      where: { id, status: ERoleStatus.ACTIVE },
+    });
+
+    if (!roleExist) {
+      throw new BadRequestException(EError.ROLE_NOT_FOUND);
+    }
+
+    return this.roleRepository.softRemove(roleExist);
+  }
+
+  async updateRole(data: UpdateListPermission, id: number) {
+    switch (data.type) {
+      case EUpdateRoleType.REMOVE:
+        return this.removePermissionToRole(data.permissionIds, id);
+      case EUpdateRoleType.ADD:
+    }
+  }
+
+  async addPermissionToRole(permissionIds: number[], roleId: number) {
+    const existPermission = await this.permissionRoleRepository.find({
+      where: { roleId, permissionId: In(permissionIds) },
+    });
+
+    // const toAddPermissionId = existPermission.map((permission) => permission.i)
+  }
+
+  async removePermissionToRole(permissionIds: number[], roleId: number) {
+    const toRemovePermission = await this.permissionRoleRepository.find({
+      where: { roleId, permissionId: Not(In(permissionIds)) },
+    });
+
+    return this.permissionRoleRepository.remove(toRemovePermission);
   }
 }

@@ -10,6 +10,7 @@ import {
   Min,
 } from 'class-validator';
 import { EJobStatus } from 'src/constants/job.constant';
+import { PaginationWithSortAndSearchReqDto } from 'src/shared/dtos/request.dto';
 
 export class CreateJobReqBody {
   @ApiProperty()
@@ -67,3 +68,7 @@ export class CreateJobReqBody {
   @IsOptional()
   tagsId?: number[];
 }
+
+export class UpdateJobReqBody extends CreateJobReqBody {}
+
+export class GetListJobReqParam extends PaginationWithSortAndSearchReqDto {}

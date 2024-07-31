@@ -67,6 +67,7 @@ export class AuthService {
       otpSecret,
       status: EUserStatus.PENDING,
       password,
+      roleId: this.configService.get<number>(EEnv.NORMAL_USER_ROLE_ID),
     });
 
     const now = Date.now();

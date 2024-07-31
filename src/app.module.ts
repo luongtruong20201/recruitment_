@@ -12,6 +12,8 @@ import { RolesModule } from './modules/roles/roles.module';
 import { PermisisonsModule } from './modules/permissions/permissions.module';
 import { FilesModule } from './modules/files/files.module';
 import { JobsModule } from './modules/jobs/jobs.module';
+import { UsersModule } from './modules/users/users.module';
+import { RegistrationsModule } from './modules/registrations/registrations.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { JobsModule } from './modules/jobs/jobs.module';
     PermisisonsModule,
     FilesModule,
     JobsModule,
+    UsersModule,
+    RegistrationsModule,
   ],
 })
 export class AppModule {}

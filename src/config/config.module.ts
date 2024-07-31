@@ -13,6 +13,7 @@ import { EEnv } from 'src/constants/env.constant';
         [EEnv.SWAGGER]: Joi.string().default('docs'),
         [EEnv.CLIENT_URL]: Joi.string().required(),
         [EEnv.CRYPTO_SECRET_KEY]: Joi.string().required(),
+        [EEnv.NORMAL_USER_ROLE_ID]: Joi.number().required(),
 
         [EEnv.DB_HOST]: Joi.string().default('localhost'),
         [EEnv.DB_PORT]: Joi.number().default(3306),
