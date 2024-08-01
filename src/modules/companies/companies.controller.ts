@@ -15,7 +15,7 @@ import {
   UpdateCompanyReqDto,
 } from './dtos/company-request.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { GuardJwt } from 'src/shared/decorators/auth.decorator';
+import { GuardJwt, GuardPublic } from 'src/shared/decorators/auth.decorator';
 
 @Controller('companies')
 @ApiTags('Companies')
@@ -23,7 +23,7 @@ export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
   @Get()
-  @GuardJwt()
+  @GuardPublic()
   getListCompany(@Query() options: GetListCompanyReqQuery) {
     return this.companiesService.getListCompaniesWithSortAndSearch(options);
   }

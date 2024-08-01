@@ -26,10 +26,10 @@ export class Job extends CustomBaseEntity {
   description: string;
 
   @Column()
-  startDate: Date;
+  startDate: number;
 
   @Column()
-  endDate: Date;
+  endDate: number;
 
   @Column()
   status: EJobStatus;

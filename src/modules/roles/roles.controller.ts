@@ -14,7 +14,6 @@ import {
   CreateRoleReqDto,
   GetListRolesWithSortAndSearchReqDto,
   UpdateListPermission,
-  UpdateRoleReqDto,
 } from './dtos/role-request.dto';
 import { GuardPublic } from 'src/shared/decorators/auth.decorator';
 
@@ -37,6 +36,11 @@ export class RolesController {
   @Get()
   getListRoles(@Query() options: GetListRolesWithSortAndSearchReqDto) {
     return this.rolesService.getListRoles(options);
+  }
+
+  @Post('role-for-user')
+  getRoleForUser() {
+    return this.rolesService.getRoleForUser();
   }
 
   @Delete(':id')

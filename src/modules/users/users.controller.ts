@@ -1,4 +1,4 @@
-import { Body, Controller, Put } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserReqBody } from './dtos/user-request.dto';
 import { AuthUser, GuardJwt } from 'src/shared/decorators/auth.decorator';
@@ -15,4 +15,7 @@ export class UsersController {
   updateUser(@AuthUser() user: IJwtPayload, @Body() body: UpdateUserReqBody) {
     return this.usersService.updateUser(user.userId, body);
   }
+
+  @Post()
+  createUser() {}
 }

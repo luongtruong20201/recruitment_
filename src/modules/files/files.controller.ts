@@ -1,5 +1,7 @@
 import {
   Controller,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -30,6 +32,11 @@ export class FilesController {
     },
   })
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.filesService.upload(file.buffer, file.originalname);
+    return this.filesService.upload(file);
+  }
+
+  @Get(':fileName')
+  getFileWithName(@Param('fileName') name: string) {
+    return this.filesService.getSignedUrlForImage(name);
   }
 }

@@ -14,6 +14,8 @@ import { FilesModule } from './modules/files/files.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { UsersModule } from './modules/users/users.module';
 import { RegistrationsModule } from './modules/registrations/registrations.module';
+import { ResumesModule } from './modules/resumes/resumes.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { RegistrationsModule } from './modules/registrations/registrations.modul
     GuardModule,
     FiltersModule,
     InterceptorModule,
+    ScheduleModule.forRoot(),
     MailModule,
     AuthModule,
     TagsModule,
@@ -32,6 +35,7 @@ import { RegistrationsModule } from './modules/registrations/registrations.modul
     JobsModule,
     UsersModule,
     RegistrationsModule,
+    ResumesModule,
   ],
 })
 export class AppModule {}

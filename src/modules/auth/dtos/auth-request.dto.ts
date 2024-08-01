@@ -34,6 +34,11 @@ export class RegisterReqBody extends LoginReqBody {
   @IsString()
   @IsNotEmpty()
   address: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  roleId: number;
 }
 
 export class RegisterVerificationReqBody {

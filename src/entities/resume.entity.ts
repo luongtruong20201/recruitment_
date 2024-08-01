@@ -1,6 +1,6 @@
 import { EResumeStatus } from 'src/constants/resume.constant';
 import { CustomBaseEntity } from 'src/shared/base/base.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { User } from './user.entity';
 import { Job } from './job.entity';
 
@@ -16,11 +16,13 @@ export class Resume extends CustomBaseEntity {
   status: EResumeStatus;
 
   @Column()
-  url: string;
+  filename: string;
 
   @ManyToOne(() => User, (user) => user.resumes)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Job, (job) => job.resumes)
+  @JoinColumn({ name: 'job_id' })
   job: Job;
 }

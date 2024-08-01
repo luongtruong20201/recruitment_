@@ -73,7 +73,7 @@ export class CompaniesService {
         status: ECompanyStatus.ACTIVE,
         jobs: {
           status: EJobStatus.ACTIVE,
-          endDate: MoreThanOrEqual(new Date()),
+          endDate: MoreThanOrEqual(Date.now() / 1000),
         },
       },
       relations: { jobs: true },
