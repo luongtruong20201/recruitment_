@@ -7,4 +7,4 @@ import { PermissionsService } from './permissions.service';
   controllers: [PermissionsController],
   providers: [PermissionsService],
 })
-export class PermisisonsModule {}
+export class PermissionsModule {}
