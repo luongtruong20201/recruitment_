@@ -69,6 +69,10 @@ export class RolesService {
     return toPagination(roles, count, options);
   }
 
+  async getRoleForUser() {
+    return await this.roleRepository.getRoleForUser();
+  }
+
   async deleteRoleById(id: number) {
     const roleExist = await this.roleRepository.findOne({
       where: { id, status: ERoleStatus.ACTIVE },
@@ -86,15 +90,23 @@ export class RolesService {
       case EUpdateRoleType.REMOVE:
         return this.removePermissionToRole(data.permissionIds, id);
       case EUpdateRoleType.ADD:
+        return this.addPermissionToRole(data.permissionIds, id);
     }
   }
 
   async addPermissionToRole(permissionIds: number[], roleId: number) {
-    const existPermission = await this.permissionRoleRepository.find({
-      where: { roleId, permissionId: In(permissionIds) },
+    const existPermissionsWithRole =
+      await this.permissionRoleRepository.getPermissionsByRole(roleId);
+    const existIds = existPermissionsWithRole.map((e) => e.permission_id);
+    const notExist = permissionIds.filter((e) => !existIds.includes(e));
+    const permissionRoles: PermissionRole[] = notExist.map((e) => {
+      return this.permissionRoleRepository.create({
+        roleId: roleId,
+        permissionId: e,
+      });
     });
 
-    // const toAddPermissionId = existPermission.map((permission) => permission.i)
+    return await this.permissionRoleRepository.save(permissionRoles);
   }
 
   async removePermissionToRole(permissionIds: number[], roleId: number) {

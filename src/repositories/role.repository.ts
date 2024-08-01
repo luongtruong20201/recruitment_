@@ -53,4 +53,14 @@ export class RoleRepository extends BaseRepository<Role> {
     this.queryBuilderWithPagination(qb, options);
     return qb.getManyAndCount();
   }
+
+  getRoleForUser() {
+    const qb = this.createQb();
+    qb.where(`${this.alias}.name NOT LIKE 'admin'`)
+      .andWhere(`${this.alias}.status = :status`, {
+        status: ERoleStatus.ACTIVE,
+      })
+      .select([`${this.alias}.id`, `${this.alias}.name`]);
+    return qb.getMany();
+  }
 }

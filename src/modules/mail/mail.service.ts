@@ -22,4 +22,13 @@ export class MailService {
       html: `Your Forgot Password url is <b>${url}</b>`,
     });
   }
+
+  async sendNewJob(email: string) {
+    return this.mailerService.sendMail({
+      to: email,
+      subject: `New Job`,
+      text: 'New Job',
+      html: `new job`,
+    });
+  }
 }

@@ -1,7 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsArray,
-  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -49,14 +48,12 @@ export class CreateJobReqBody {
   description: string;
 
   @ApiProperty()
-  @IsDateString()
-  @IsNotEmpty()
-  startDate: string;
+  @IsNumber()
+  startDate: number;
 
   @ApiProperty()
-  @IsDateString()
-  @IsNotEmpty()
-  endDate: string;
+  @IsNumber()
+  endDate: number;
 
   @ApiProperty({ enum: EJobStatus })
   @IsEnum(EJobStatus)
