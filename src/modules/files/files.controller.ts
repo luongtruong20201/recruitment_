@@ -1,7 +1,6 @@
 import {
   Controller,
   Post,
-  UnprocessableEntityException,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -9,8 +8,6 @@ import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FilesService } from './files.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GuardPublic } from 'src/shared/decorators/auth.decorator';
-import { IMAGE_REGEX } from 'index';
-import { EError } from 'src/constants/error.constant';
 
 @Controller('files')
 @ApiTags('Files')
@@ -19,17 +16,7 @@ export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
   @Post('upload/image')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      fileFilter: (req, file, cb) => {
-        const mimetype = file.mimetype;
-        if (!IMAGE_REGEX.test(mimetype)) {
-          cb(new UnprocessableEntityException(EError.FILE_TYPE_INVALID), false);
-        }
-        cb(null, true);
-      },
-    }),
-  )
+  @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -43,6 +30,6 @@ export class FilesController {
     },
   })
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.filesService.upload(file.buffer);
+    return this.filesService.upload(file.buffer, file.originalname);
   }
 }

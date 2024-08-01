@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { S3 } from '@aws-sdk/client-s3';
 import { EEnv } from 'src/constants/env.constant';
 import { v4 as uuid } from 'uuid';
+import { extname } from 'path';
 
 @Injectable()
 export class FilesService {
@@ -20,14 +21,16 @@ export class FilesService {
     });
   }
 
-  async upload(buffer: Buffer) {
-    const bucket = this.configService.get<string>(EEnv.MINIO_BUCKET);
+  async upload(buffer: Buffer, originalName: string) {
+    const extension = extname(originalName);
     const name = uuid();
+    const fileName = `${name}${extension}`;
+    const bucket = this.configService.get<string>(EEnv.MINIO_BUCKET);
     await this.s3.putObject({
       Bucket: bucket,
-      Key: `${name}.png`,
+      Key: `images/${fileName}`,
       Body: buffer,
     });
-    return name;
+    return fileName;
   }
 }

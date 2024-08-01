@@ -13,7 +13,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const response = context.getResponse();
-    this.logger.error(exception);
+    console.error(exception);
     const data: IResponse<any> = {
       data: null,
       status_code: HttpStatus.INTERNAL_SERVER_ERROR,

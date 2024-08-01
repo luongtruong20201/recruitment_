@@ -9,7 +9,7 @@ import { InterceptorModule } from './shared/modules/interceptors/interceptor.mod
 import { TagsModule } from './modules/tags/tags.module';
 import { CompaniesModule } from './modules/companies/companies.module';
 import { RolesModule } from './modules/roles/roles.module';
-import { PermisisonsModule } from './modules/permissions/permissions.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
 import { FilesModule } from './modules/files/files.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { UsersModule } from './modules/users/users.module';
@@ -27,7 +27,7 @@ import { RegistrationsModule } from './modules/registrations/registrations.modul
     TagsModule,
     CompaniesModule,
     RolesModule,
-    PermisisonsModule,
+    PermissionsModule,
     FilesModule,
     JobsModule,
     UsersModule,

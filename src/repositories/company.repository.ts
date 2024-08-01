@@ -13,7 +13,7 @@ export class CompanyRepository extends BaseRepository<Company> {
     super(Company, dataSource.createEntityManager());
   }
 
-  getListcompanyWithSortAndSearch(option: GetListCompanyReqQuery) {
+  getListCompaniesWithSortAndSearch(option: GetListCompanyReqQuery) {
     const qb = this.createQb();
     this.queryBuilderWithPagination(qb, option);
     return qb.getManyAndCount();

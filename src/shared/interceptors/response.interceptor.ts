@@ -27,13 +27,12 @@ export function createResponse<T>(data: any): IResponse<T> {
 export class ResponseInterceptor<T>
   implements NestInterceptor<T, IResponse<T>>
 {
-  logger = new Logger(ResponseInterceptor.name);
   intercept(
     context: ExecutionContext,
     next: CallHandler<T>,
   ): Observable<IResponse<T>> | Promise<Observable<IResponse<T>>> {
     const request = context.switchToHttp().getRequest<Request>();
-    this.logger.log(request.headers, request.query, request.params);
+    console.log(request.headers, request.query, request.params);
     return next.handle().pipe(
       map((data) => {
         const response = context.switchToHttp().getResponse();

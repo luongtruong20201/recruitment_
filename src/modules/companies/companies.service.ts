@@ -62,7 +62,7 @@ export class CompaniesService {
 
   async getListCompaniesWithSortAndSearch(data: GetListCompanyReqQuery) {
     const [companies, count] =
-      await this.companyRepository.getListcompanyWithSortAndSearch(data);
+      await this.companyRepository.getListCompaniesWithSortAndSearch(data);
     return toPagination(companies, count, data);
   }
 
